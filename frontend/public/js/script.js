@@ -34,12 +34,12 @@ function handleFormSubmit(event) {
     // Optional: Leere die Formulardaten
     form.reset();
 }
-document.querySelector('.scroll-right').addEventListener('click', function () {
+document.querySelector('.scroll-right').addEventListener('click', function() {
     const offerCards = document.querySelector('.offer-cards');
     offerCards.scrollBy({ left: 300, behavior: 'smooth' });  // Scrollt 300px nach rechts
 });
 
-document.querySelector('.scroll-left').addEventListener('click', function () {
+document.querySelector('.scroll-left').addEventListener('click', function() {
     const offerCards = document.querySelector('.offer-cards');
     offerCards.scrollBy({ left: -300, behavior: 'smooth' });  // Scrollt 300px nach links
 });
@@ -47,11 +47,22 @@ let currentIndex = 0;
 const offers = document.querySelectorAll('.offer-card');
 const totalOffers = offers.length;
 
-function showNextOffer() {
-    offers[currentIndex].style.display = 'none';
-    currentIndex = (currentIndex + 1) % totalOffers;  // Loop back to the first offer
-    offers[currentIndex].style.display = 'block';
-}
+document.getElementById('travel-form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent page reload
 
-setInterval(showNextOffer, 3000);  // Change offer every 3 seconds
+            // Get values from the form
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const travelType = document.getElementById('travel-type').value;
 
+            // Check if both fields are filled
+            if (from && to) {
+                // Create the Google Maps URL
+                const googleMapsURL = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}&travelmode=${travelType}`;
+
+                // Redirect directly to Google Maps with the parameters
+                window.location.href = googleMapsURL;
+            } else {
+                alert("Please fill in both the departure and destination locations.");
+            }
+        });
