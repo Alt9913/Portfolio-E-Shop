@@ -1524,3 +1524,90 @@ textarea {
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+/* Booking Page Styles */
+.booking-page {
+    padding: 40px;
+    font-family: Arial, sans-serif;
+}
+
+.booking-hero {
+    background-image: url('../assets/bookingwallpaper.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    text-align: center;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.booking-hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
+}
+
+.booking-hero p {
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); 
+}
+
+.product-summary {
+    padding: 40px;
+    background-color: #f5f5f5;
+}
+
+.product-details {
+    display: flex;
+    gap: 30px;
+}
+
+.product-image img {
+    width: 300px;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    flex: 1;
+}
+
+.product-info h3 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.price {
+    font-size: 1.5rem;
+    color: #f8604a;
+}
+
+.booking-summary {
+    margin-top: 30px;
+}
+
+.booking-summary h3 {
+    font-size: 1.8rem;
+    color: #333;
+}
+
+.booking-summary p {
+    font-size: 1.2rem;
+    color: #555;
+}
+
+.cta-btn {
+    background-color: #3498db;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: background-color 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: #2980b9;
+}
