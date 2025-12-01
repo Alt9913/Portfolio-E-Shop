@@ -1,6 +1,12 @@
--- -----------------------------------------
--- CREATE DATABASES
--- -----------------------------------------
+-- ============================================
+--   1) CREATE DATABASES
+-- ============================================
+
+DROP DATABASE IF EXISTS STAGING;
+DROP DATABASE IF EXISTS DATASTORE;
+DROP DATABASE IF EXISTS DATAMART_DEV;
+DROP DATABASE IF EXISTS DATAMART_PRD;
+DROP DATABASE IF EXISTS METADATA;
 
 CREATE DATABASE STAGING CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE DATABASE DATASTORE CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -8,111 +14,189 @@ CREATE DATABASE DATAMART_DEV CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE DATABASE DATAMART_PRD CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 CREATE DATABASE METADATA CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
--- -----------------------------------------
--- STAGING
--- -----------------------------------------
+-- ============================================
+--   2) CREATE TABLES IN STAGING (MASTER MODEL)
+-- ============================================
 
 USE STAGING;
 
-CREATE TABLE category (
+CREATE TABLE country (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(100) NOT NULL,
+    name VARCHAR(100),
+    main_link VARCHAR(255),
     description TEXT,
+    title VARCHAR(255),
+    area VARCHAR(100),
+    language VARCHAR(100),
+    capital VARCHAR(100),
+    currency VARCHAR(50),
+    population VARCHAR(50),
+    picture_name VARCHAR(255),
+    picture_path VARCHAR(255),
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
     date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     modified_by_user VARCHAR(50)
 );
 
-CREATE TABLE article (
+CREATE TABLE country_highlights (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    category_id INT NOT NULL,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(100),
+    country_id INT NOT NULL,
     description TEXT,
-    price DECIMAL(10,2) NOT NULL,
-    stock_quantity INT DEFAULT 0,
-    is_deleted BOOLEAN DEFAULT FALSE,
+    link VARCHAR(255),
+    picture_name VARCHAR(255),
+    picture_path VARCHAR(255),
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
     date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     modified_by_user VARCHAR(50),
-    FOREIGN KEY (category_id) REFERENCES category(id) ON DELETE CASCADE
+    FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE CASCADE
+);
+
+CREATE TABLE category (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100),
+    description TEXT,
+    picture_name VARCHAR(255),
+    picture_path VARCHAR(255),
+    date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    modified_by_user VARCHAR(50)
 );
 
 CREATE TABLE customer (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    phone VARCHAR(20),
-    street VARCHAR(100),
-    house_number VARCHAR(20),
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    birthdate DATE,
+    country VARCHAR(100),
+    city VARCHAR(100),
     postal_code VARCHAR(20),
-    city VARCHAR(50),
-    country VARCHAR(50),
+    street VARCHAR(100),
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
     date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     modified_by_user VARCHAR(50)
 );
 
-CREATE TABLE transaction_head (
+CREATE TABLE contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    birthdate DATE,
+    country VARCHAR(100),
+    city VARCHAR(100),
+    postal_code VARCHAR(20),
+    street VARCHAR(100),
+    date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    modified_by_user VARCHAR(50)
+);
+
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    price DECIMAL(10,2),
+    land VARCHAR(100),
+    city VARCHAR(100),
+    street VARCHAR(100),
+    postal_code VARCHAR(20),
+    contact_id INT,
+    date DATE,
+    date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
+    date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    modified_by_user VARCHAR(50),
+    FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE SET NULL
+);
+
+CREATE TABLE booking (
     id INT AUTO_INCREMENT PRIMARY KEY,
     customer_id INT NOT NULL,
-    transaction_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    total_amount DECIMAL(10,2) NOT NULL,
-    status VARCHAR(20) DEFAULT 'Open',
+    price DECIMAL(10,2),
+    days INT,
+    date_start DATE,
+    date_end DATE,
+    payment_type VARCHAR(50),
+    product INT,
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
     date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     modified_by_user VARCHAR(50),
-    FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE
+    FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
+    FOREIGN KEY (product) REFERENCES products(id) ON DELETE SET NULL
 );
 
-CREATE TABLE transaction_position (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    transaction_head_id INT NOT NULL,
-    article_id INT NOT NULL,
-    quantity INT NOT NULL,
-    price DECIMAL(10,2) NOT NULL,
-    date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
-    date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    modified_by_user VARCHAR(50),
-    FOREIGN KEY (transaction_head_id) REFERENCES transaction_head(id) ON DELETE CASCADE,
-    FOREIGN KEY (article_id) REFERENCES article(id)
-);
 
--- -----------------------------------------
--- DATASTORE
--- -----------------------------------------
 
+-- =======================================================
+--   3) CREATE TABLES IN OTHER DATABASES (LIKE STAGING)
+-- =======================================================
+
+-- ---------- DATASTORE ----------
 USE DATASTORE;
 
+CREATE TABLE country LIKE STAGING.country;
+CREATE TABLE country_highlights LIKE STAGING.country_highlights;
 CREATE TABLE category LIKE STAGING.category;
-CREATE TABLE article LIKE STAGING.article;
 CREATE TABLE customer LIKE STAGING.customer;
-CREATE TABLE transaction_head LIKE STAGING.transaction_head;
-CREATE TABLE transaction_position LIKE STAGING.transaction_position;
+CREATE TABLE contacts LIKE STAGING.contacts;
+CREATE TABLE products LIKE STAGING.products;
+CREATE TABLE booking LIKE STAGING.booking;
 
--- -----------------------------------------
--- DATAMART_DEV
--- -----------------------------------------
+-- Add foreign keys manually (same as STAGING)
+ALTER TABLE country_highlights
+    ADD FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE CASCADE;
 
+ALTER TABLE products
+    ADD FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE SET NULL;
+
+ALTER TABLE booking
+    ADD FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
+    ADD FOREIGN KEY (product) REFERENCES products(id) ON DELETE SET NULL;
+
+
+
+-- ---------- DATAMART_DEV ----------
 USE DATAMART_DEV;
 
+CREATE TABLE country LIKE STAGING.country;
+CREATE TABLE country_highlights LIKE STAGING.country_highlights;
 CREATE TABLE category LIKE STAGING.category;
-CREATE TABLE article LIKE STAGING.article;
 CREATE TABLE customer LIKE STAGING.customer;
-CREATE TABLE transaction_head LIKE STAGING.transaction_head;
-CREATE TABLE transaction_position LIKE STAGING.transaction_position;
+CREATE TABLE contacts LIKE STAGING.contacts;
+CREATE TABLE products LIKE STAGING.products;
+CREATE TABLE booking LIKE STAGING.booking;
 
--- -----------------------------------------
--- DATAMART_PRD
--- -----------------------------------------
+ALTER TABLE country_highlights
+    ADD FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE CASCADE;
 
+ALTER TABLE products
+    ADD FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE SET NULL;
+
+ALTER TABLE booking
+    ADD FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
+    ADD FOREIGN KEY (product) REFERENCES products(id) ON DELETE SET NULL;
+
+
+
+-- ---------- DATAMART_PRD ----------
 USE DATAMART_PRD;
 
+CREATE TABLE country LIKE STAGING.country;
+CREATE TABLE country_highlights LIKE STAGING.country_highlights;
 CREATE TABLE category LIKE STAGING.category;
-CREATE TABLE article LIKE STAGING.article;
 CREATE TABLE customer LIKE STAGING.customer;
-CREATE TABLE transaction_head LIKE STAGING.transaction_head;
-CREATE TABLE transaction_position LIKE STAGING.transaction_position;
+CREATE TABLE contacts LIKE STAGING.contacts;
+CREATE TABLE products LIKE STAGING.products;
+CREATE TABLE booking LIKE STAGING.booking;
+
+ALTER TABLE country_highlights
+    ADD FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE CASCADE;
+
+ALTER TABLE products
+    ADD FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE SET NULL;
+
+ALTER TABLE booking
+    ADD FOREIGN KEY (customer_id) REFERENCES customer(id) ON DELETE CASCADE,
+    ADD FOREIGN KEY (product) REFERENCES products(id) ON DELETE SET NULL;
+
 
 -- -----------------------------------------
 -- METADATA + PROCEDURE
