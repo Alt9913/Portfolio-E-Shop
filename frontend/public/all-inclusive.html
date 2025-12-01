@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avetura</title>
+    <link rel="stylesheet" href="css/styles.css"> 
+</head>
+<body>
+    <header>
+    
+     <a href="index.html">
+        <img src="assets/ogol.png" alt="Anventura Logo" id="logo">
+    </a>
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="Gebe dein Traumland ein...">
+    </div>
+    <div class="language-selector">
+        <button class="language-btn">EN</button>
+        <div class="language-dropdown">
+            <ul>
+                <li><a href="index.html" >EN</a></li>
+                <li><a href="indexde.html" >DE</a></li>
+                <li><a href="indextü.html" >TÜ</a></li>
+                <li><a href="indexru.html" >РУ</a></li>
+            </ul>
+        </div>
+    </div>
+
+   
+    
+</header>
+<nav>
+        <ul>
+            <li><a href="world-map.html" id="wortra">World Map</a></li>
+            <li><a href="all-inclusive.html" id="alltra">All-Inclusive</a></li>
+            <li><a href="apartments.html" id="apatra">Apartments</a></li>
+            <li><a href="transport.html" id="tratra">Transport</a></li>
+            <li><a href="about-us.html" id="abotra">About Us</a></li>
+        </ul>
+    </nav>
+<main class="all-inclusive-page">
+    <!-- Hero Section -->
+    <section class="all-inclusive-hero">
+        <div class="hero-overlay-al">
+            <h1 style="margin-right: 10px;">All-Inclusive Escapes </h1>
+            <p>Relax and enjoy – everything is included!</p>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="how-it-works-cards">
+            <div class="card">
+                <h3>Step 1</h3>
+                <p>Select your destination and package.</p>
+            </div>
+            <div class="card">
+                <h3>Step 2</h3>
+                <p>Book your stay, flights, and activities.</p>
+            </div>
+            <div class="card">
+                <h3>Step 3</h3>
+                <p>Enjoy a stress-free vacation with everything taken care of.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top All-Inclusive Offers -->
+    <section class="top-offers-al">
+        <h2>Top All-Inclusive Offers</h2>
+        <div class="offer-cards-al">
+            <div class="offer-card-al">
+                <div class="offer-image-al">
+                    <img src="assets/allinclusivemaledives.jpg" alt="Beach Resort">
+                </div>
+                <div class="offer-info-al">
+                    <h3>Beach Resort in Maldives</h3>
+                    <p>Enjoy a luxury stay with all meals, drinks, and activities included.</p>
+                    <span class="price-al">$2,500/week</span>
+                    <button class="cta-btn-al">Book Now</button>
+                </div>
+            </div>
+
+            <div class="offer-card-al">
+                <div class="offer-image-al">
+                    <img src="assets/carribeanoffer.jpeg" alt="Caribbean Cruise">
+                </div>
+                <div class="offer-info-al">
+                    <h3>Caribbean Cruise</h3>
+                    <p>Explore the islands with a cruise that includes everything – from meals to excursions.</p>
+                    <span class="price-al">$3,000/10 days</span>
+                    <button class="cta-btn-al">Book Now</button>
+                </div>
+            </div>
+
+            <div class="offer-card-al">
+                <div class="offer-image-al">
+                    <img src="assets/safarioffer.jpeg" alt="Luxury Safari">
+                </div>
+                <div class="offer-info-al">
+                    <h3>Luxury Safari in South Africa</h3>
+                    <p>Experience an all-inclusive safari with guided tours, meals, and drinks.</p>
+                    <span class="price-al">$4,000/week</span>
+                    <button class="cta-btn-al">Book Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose All-Inclusive -->
+    <section class="why-all-inclusive">
+        <h2>Why Choose All-Inclusive?</h2>
+        <ul>
+            <li>No hidden costs – everything is included</li>
+            <li>Stress-free planning – relax and enjoy</li>
+            <li>Variety of destinations and experiences</li>
+            <li>Exclusive access to premium amenities</li>
+        </ul>
+    </section>
+
+    <!-- Price Filter or Interactive Feature (optional) -->
+    <section class="price-filter">
+        <h2>Find Your Perfect All-Inclusive Getaway</h2>
+        <form>
+            <label for="destination">Select your destination:</label>
+            <select id="destination">
+                <option value="maldives">Maldives</option>
+                <option value="caribbean">Caribbean</option>
+                <option value="africa">South Africa</option>
+            </select>
+
+            <label for="price-range">Price Range:</label>
+            <input type="range" id="price-range" min="1000" max="5000" step="500">
+
+            <button type="submit" class="cta-btn">Find Offers</button>
+        </form>
+    </section>
+</main>
+
+   <script src="js/script.js"></script> 
+<footer>
+        <nav style="padding-top: 10px;">
+            <ul>
+                <li><a href="index.html" >Home</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="legalinfo.html">Legal Info</a></li>
+            </ul>
+        </nav>
+</footer>
+</body>
+
+</html>
