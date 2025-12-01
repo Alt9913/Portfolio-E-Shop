@@ -66,3 +66,37 @@ document.getElementById('travel-form').addEventListener('submit', function(event
                 alert("Please fill in both the departure and destination locations.");
             }
         });
+
+
+// hot-offers
+async function loadHotOffers() {
+    try {
+        const response = await fetch("http://localhost:8000/hot-offers"); //NOCH ANPASSEN!
+        const offers = await response.json();
+
+        const container = document.getElementById("offers-container");
+        container.innerHTML = "";
+
+        offers.forEach((offer) => {
+            const offerHTML = `
+                <div class="offer">
+                    <a href="${offer.link || '#'}" target="_blank">
+                        <img src="${offer.picture_path || 'assets/default.jpg'}" alt="${offer.name}">
+                    </a>
+                    <div class="offer-info">
+                        <h3>${offer.name}</h3>
+                        <p>Location: ${offer.city || ''}, ${offer.land || ''}</p>
+                        <p>Price: €${offer.price.toFixed(2)} per night</p>
+                    </div>
+                </div>
+            `;
+            container.insertAdjacentHTML("beforeend", offerHTML);
+        });
+    } catch (error) {
+        console.error("Fehler beim Laden der Hot Offers:", error);
+        document.getElementById("offers-container").innerHTML =
+            "<p>Die Angebote konnten nicht geladen werden.</p>";
+    }
+}
+
+document.addEventListener("DOMContentLoaded", loadHotOffers);
