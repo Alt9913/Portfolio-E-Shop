@@ -41,22 +41,3 @@ VALUES
 ,('Luxury Apartment in Paris', 9, 'Stay in a luxury apartment in Paris, offering sophisticated style and proximity to the city’s best shops, cafes, and cultural landmarks.', 250.00, 'Paris', 'parisapartment.jpg', 'assets/parisapartment.jpg', NULL, 'admin')
 ,('Beachfront Condo in Miami', 6, 'Enjoy a luxurious beachfront condo in Miami, Florida, with panoramic ocean views and exclusive amenities.', 350.00, 'Miami', 'miamiapartment.jpeg', 'assets/miamiapartment.jpeg', NULL, 'admin')
 ,('Modern Apartment in New York', 6, 'Stay in a modern apartment near Central Park, offering a chic urban experience in the heart of New York City.', 400.00, 'New York', 'newyorkapartment.jpeg', 'assets/newyorkapartment.jpeg', NULL, 'admin');
-
-
---('Villa in Odesa',,, 61.00,                     'Ukraine', 'Odesa', 'hotoffer1.jpg', 'assets/hotoffer1.jpg', 'https://www.tripadvisor.de/Hotel_Review-g295368-d2619797-Reviews-Villa_Le_Premier-Odesa_Odesa_Oblast.html', 'admin')
---,('Beach House in Izmir',,, 413.00,             'Türkei', 'Izmir', 'hotoffer2.jpg', 'assets/hotoffer2.jpg', 'https://www.hellovillam.com/en/villa-kasovari', 'admin')
---,('Berlin Weekend Getaway',,, 250.00,           'Deutschland', 'Berlin', 'berlinoffer.jpg', 'assets/berlinoffer.jpg', NULL, 'admin')
---,('All-Inclusive Beach Holiday',,, 700.00,      'Spanien', 'N/A', 'spainoffer.jpg', 'assets/spainoffer.jpg', NULL, 'admin')
---,('Paris City Experience',,, 350.00,            'Frankreich', 'Paris', 'parisoffer.jpeg', 'assets/parisoffer.jpeg', NULL, 'admin')
---,('Luxury Resort in Mallorca',,, 1200.00,       'Spanien', 'Mallorca', 'mallorcaoffer.jpg', 'assets/mallorcaoffer.jpg', NULL, 'admin')
---,('New York',,, 400.00,                         'USA', 'New York', 'newyorkoffer.jpeg', 'assets/newyorkoffer.jpeg', 'https://www.nyctourism.com', 'admin')
---,('Tokyo',,, 250.00,                            'Japan', 'Tokio', 'tokiooffer.jpeg', 'assets/tokiooffer.jpeg', 'https://www.gotokyo.org/en/index.html', 'admin')
---,('Sydney',,, 600.00,                           'Australien', 'Sydney', 'sydneyoffer.jpg', 'assets/sydneyoffer.jpg', 'https://www.sydney.com', 'admin')
---,('Rome',,, 750.00,                             'Italien', 'Rom', 'romeoffer.jpg', 'assets/romeoffer.jpg', 'https://www.turismoroma.it/en', 'admin')
---,('Beach Resort in Maldives',,, 2500.00,        'Maldiven', 'N/A', 'allinclusivemaledives.jpg', 'assets/allinclusivemaledives.jpg', NULL, 'admin')
---,('Caribbean Cruise',,, 3000.00,                'Karibik', 'N/A', 'carribeanoffer.jpeg', 'assets/carribeanoffer.jpeg', NULL, 'admin')
---,('Luxury Safari in South Africa',,, 4000.00,   'Südafrika', 'N/A', 'safarioffer.jpeg', 'assets/safarioffer.jpeg', NULL, 'admin')
---,('Luxury Apartment in Paris',,, 250.00,        'Frankreich', 'Paris', 'parisapartment.jpg', 'assets/parisapartment.jpg', NULL, 'admin')
---,('Beachfront Condo in Miami',,, 350.00,         'USA', 'Miami', 'miamiapartment.jpeg', 'assets/miamiapartment.jpeg', NULL, 'admin')
---,('Modern Apartment in New York',,, 400.00,      'USA', 'New York', 'newyorkapartment.jpeg', 'assets/newyorkapartment.jpeg', NULL, 'admin');
-
