@@ -6,7 +6,7 @@ app = FastAPI()
 
 def get_db():
     return mysql.connector.connect(
-        host="192.168.134.130",
+        host="localhost",
         user="alt",
         password="admin",
         database="DATAMART_PRD"
