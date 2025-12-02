@@ -12,6 +12,7 @@ def get_offers():
     LEFT JOIN country c 
         ON p.country_id = c.id
     WHERE link IS NOT NULL
+    ORDER BY id DESC
     LIMIT %s
     """
 
@@ -29,5 +30,6 @@ def get_out_offers():
     LEFT JOIN country c 
         ON p.country_id = c.id
     WHERE link IS NOT NULL
+    ORDER BY id ASC
     LIMIT %s
     """
