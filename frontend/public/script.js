@@ -109,6 +109,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    const hotOffers = new HotOffersLoader();
+    const ourOffers = new OurOffersLoader();
+
     hotOffers.loadOffers();
     ourOffers.loadOffers();
+
+
 });
