@@ -1,12 +1,13 @@
 from fastapi import FastAPI
 from db.queries import get_offers
 import mysql.connector
+import MySQLdb
 
 app = FastAPI()
 
 def get_db():
-    return mysql.connector.connect(
-        host="localhost",
+    return MySQLdb.connect(
+        host="192.168.134.130",  # Die IP-Adresse des MySQL-Servers
         user="alt",
         password="admin",
         database="DATAMART_PRD"
