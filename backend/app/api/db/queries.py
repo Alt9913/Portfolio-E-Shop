@@ -15,7 +15,7 @@ def get_offers():
     LIMIT %s
     """
 
-def get_our_offers():
+def get_out_offers():
     return """
     SELECT 
         p.id, 
@@ -28,6 +28,6 @@ def get_our_offers():
     FROM products p
     LEFT JOIN country c 
         ON p.country_id = c.id
-    WHERE link IS NULL
+    WHERE link IS NOT NULL
     LIMIT %s
     """

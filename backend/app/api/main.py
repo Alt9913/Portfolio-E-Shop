@@ -38,7 +38,7 @@ def get_hot_offers(limit: int = 3):
         # Verbindung zur DB aufbauen
         db = get_db()
         cursor = db.cursor(dictionary=True)
-        cursor.execute(get_our_offers(), (limit,))
+        cursor.execute(get_offers(), (limit,))
         
         # Holen der Ergebnisse
         result = cursor.fetchall()
@@ -56,7 +56,7 @@ def get_our_offers(limit: int = 10):
         # Verbindung zur DB aufbauen
         db = get_db()
         cursor = db.cursor(dictionary=True)
-        cursor.execute(get_offers(), (limit,))
+        cursor.execute(get_our_offers(), (limit,))
         
         # Holen der Ergebnisse
         result = cursor.fetchall()
