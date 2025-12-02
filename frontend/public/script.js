@@ -3,100 +3,90 @@ document.addEventListener('DOMContentLoaded', () => {
     const languageDropdown = document.querySelector('.language-dropdown');
 
     // Öffne und schließe das Dropdown-Menü beim Klicken
-    languageBtn.addEventListener('click', (event) => {
-        languageDropdown.style.display = languageDropdown.style.display === 'block' ? 'none' : 'block';
-        event.stopPropagation(); // Verhindert das Schließen, wenn man innerhalb des Dropdowns klickt
-    });
+    if (languageBtn && languageDropdown) {
+        languageBtn.addEventListener('click', (event) => {
+            languageDropdown.style.display = languageDropdown.style.display === 'block' ? 'none' : 'block';
+            event.stopPropagation(); // Verhindert das Schließen, wenn man innerhalb des Dropdowns klickt
+        });
 
-    // Schließe das Dropdown, wenn irgendwo außerhalb geklickt wird
-    window.addEventListener('click', () => {
-        languageDropdown.style.display = 'none';
-    });
-});
+        // Schließe das Dropdown, wenn irgendwo außerhalb geklickt wird
+        window.addEventListener('click', () => {
+            languageDropdown.style.display = 'none';
+        });
+    }
 
-
-function handleFormSubmit(event) {
-    event.preventDefault();  // Verhindert das Standardabsenden des Formulars
-
-    // Hier kannst du die Formulardaten sammeln und verarbeiten
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const message = form.message.value;
-
-    console.log("Name:", name);
-    console.log("Email:", email);
-    console.log("Message:", message);
-
-    // Bestätigungsnachricht anzeigen
-    alert("Thank you for your message! We will get back to you soon.");
-
-    // Optional: Leere die Formulardaten
-    form.reset();
-}
-document.querySelector('.scroll-right').addEventListener('click', function() {
+    // Scroll-Funktionen für die Angebote
+    const scrollRightBtn = document.querySelector('.scroll-right');
+    const scrollLeftBtn = document.querySelector('.scroll-left');
     const offerCards = document.querySelector('.offer-cards');
-    offerCards.scrollBy({ left: 300, behavior: 'smooth' });  // Scrollt 300px nach rechts
-});
 
-document.querySelector('.scroll-left').addEventListener('click', function() {
-    const offerCards = document.querySelector('.offer-cards');
-    offerCards.scrollBy({ left: -300, behavior: 'smooth' });  // Scrollt 300px nach links
-});
-let currentIndex = 0;
-const offers = document.querySelectorAll('.offer-card');
-const totalOffers = offers.length;
+    if (scrollRightBtn && scrollLeftBtn && offerCards) {
+        scrollRightBtn.addEventListener('click', function() {
+            offerCards.scrollBy({ left: 300, behavior: 'smooth' });  // Scrollt 300px nach rechts
+        });
 
-document.getElementById('travel-form').addEventListener('submit', function(event) {
-            event.preventDefault();  // Prevent page reload
+        scrollLeftBtn.addEventListener('click', function() {
+            offerCards.scrollBy({ left: -300, behavior: 'smooth' });  // Scrollt 300px nach links
+        });
+    }
 
-            // Get values from the form
+    // Formular-Submit-Handler
+    const travelForm = document.getElementById('travel-form');
+    if (travelForm) {
+        travelForm.addEventListener('submit', function(event) {
+            event.preventDefault();  // Verhindert das Standardabsenden des Formulars
+
             const from = document.getElementById('from').value;
             const to = document.getElementById('to').value;
             const travelType = document.getElementById('travel-type').value;
 
-            // Check if both fields are filled
             if (from && to) {
-                // Create the Google Maps URL
+                // Google Maps URL erstellen
                 const googleMapsURL = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(from)}&destination=${encodeURIComponent(to)}&travelmode=${travelType}`;
-
-                // Redirect directly to Google Maps with the parameters
-                window.location.href = googleMapsURL;
+                window.location.href = googleMapsURL; // Weiterleitung zu Google Maps
             } else {
                 alert("Please fill in both the departure and destination locations.");
             }
         });
-
-
-// hot-offers
-async function loadHotOffers() {
-    try {
-        const response = await fetch("http://localhost:8000/hot-offers"); //NOCH ANPASSEN!
-        const offers = await response.json();
-
-        const container = document.getElementById("offers-container");
-        container.innerHTML = "";
-
-        offers.forEach((offer) => {
-            const offerHTML = `
-                <div class="offer">
-                    <a href="${offer.link || '#'}" target="_blank">
-                        <img src="${offer.picture_path || 'assets/default.jpg'}" alt="${offer.name}">
-                    </a>
-                    <div class="offer-info">
-                        <h3>${offer.name}</h3>
-                        <p>Location: ${offer.city || ''}, ${offer.country_name || ''}</p>
-                        <p>Price: €${offer.price.toFixed(2)} per night</p>
-                    </div>
-                </div>
-            `;
-            container.insertAdjacentHTML("beforeend", offerHTML);
-        });
-    } catch (error) {
-        console.error("Fehler beim Laden der Hot Offers:", error);
-        document.getElementById("offers-container").innerHTML =
-            "<p>Die Angebote konnten nicht geladen werden.</p>";
     }
-}
 
-document.addEventListener("DOMContentLoaded", loadHotOffers);
+    // Hot Offers laden
+    async function loadHotOffers() {
+        try {
+            const response = await fetch("http://localhost:8000/hot-offers");  // NOCH ANPASSEN!
+            if (!response.ok) {
+                throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+            }
+            const offers = await response.json();
+            const container = document.getElementById("offers-container");
+
+            if (container) {
+                container.innerHTML = "";  // Alte Angebote löschen
+
+                offers.forEach((offer) => {
+                    const offerHTML = `
+                        <div class="offer">
+                            <a href="${offer.link || '#'}" target="_blank">
+                                <img src="${offer.picture_path || 'assets/default.jpg'}" alt="${offer.name}">
+                            </a>
+                            <div class="offer-info">
+                                <h3>${offer.name}</h3>
+                                <p>Location: ${offer.city || ''}, ${offer.country_name || ''}</p>
+                                <p>Price: €${offer.price.toFixed(2)} per night</p>
+                            </div>
+                        </div>
+                    `;
+                    container.insertAdjacentHTML("beforeend", offerHTML);
+                });
+            }
+        } catch (error) {
+            console.error("Fehler beim Laden der Hot Offers:", error);
+            const container = document.getElementById("offers-container");
+            if (container) {
+                container.innerHTML = "<p>Die Angebote konnten nicht geladen werden.</p>";
+            }
+        }
+    }
+
+    loadHotOffers(); // Hot offers laden, wenn das DOM geladen ist
+});
