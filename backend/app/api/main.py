@@ -25,6 +25,7 @@ def get_db():
         #ssl_key="/path/to/client-key.pem",    # Dein Client-Schlüssel
         #ssl_verify_cert=True,                 # SSL-Zertifikat verifizieren
         #ssl_verify_identity=True             # Identität des Servers verifizieren
+        ssl_disabled = True
     )
 
 @app.get("/hot-offers")
