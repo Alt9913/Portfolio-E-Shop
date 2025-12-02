@@ -19,7 +19,7 @@ def get_db():
         host="localhost",
         user="alt",
         password="admin",
-        database="DATAMART_PRD"
+        database="DATAMART_PRD",
         #ssl_ca="/path/to/ca-cert.pem",        # Das CA-Zertifikat
         #ssl_cert="/path/to/client-cert.pem",  # Dein Client-Zertifikat
         #ssl_key="/path/to/client-key.pem",    # Dein Client-Schlüssel
