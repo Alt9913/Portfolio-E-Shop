@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from db.queries import get_offers
+from db.queries import get_offers, get_our_offers
 import mysql.connector
 import ssl
 
@@ -38,7 +38,7 @@ def get_hot_offers(limit: int = 3):
         # Verbindung zur DB aufbauen
         db = get_db()
         cursor = db.cursor(dictionary=True)
-        cursor.execute(get_offers(), (limit,))
+        cursor.execute(get_our_offers(), (limit,))
         
         # Holen der Ergebnisse
         result = cursor.fetchall()
