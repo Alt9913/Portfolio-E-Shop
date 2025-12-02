@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from db.queries import get_offers
+from db.queries import get_offers, get_our_offers
 import mysql.connector
 import ssl
 
@@ -51,7 +51,7 @@ def get_hot_offers(limit: int = 3):
         raise HTTPException(status_code=500, detail=f"Fehler beim Abrufen der Angebote: {err}")
 
 @app.get("/our-offers")
-def get_hot_offers(limit: int = 12):
+def get_our_offers(limit: int = 12):
     try:
         # Verbindung zur DB aufbauen
         db = get_db()
