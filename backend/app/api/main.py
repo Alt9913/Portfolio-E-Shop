@@ -10,6 +10,7 @@ def get_db():
         user="alt",
         password="admin",
         database="DATAMART_PRD"
+        ssl_disabled=True
     )
 
 @app.get("/hot-offers")
