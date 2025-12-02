@@ -110,7 +110,7 @@ CREATE TABLE products (
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
     date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     modified_by_user VARCHAR(50),
-    FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE SET NULL
+    FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE SET NULL,
     FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE SET NULL
 );
 
