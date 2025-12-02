@@ -28,6 +28,5 @@ def get_our_offers():
     FROM products p
     LEFT JOIN country c 
         ON p.country_id = c.id
-    WHERE link IS NULL
     LIMIT %s
     """
