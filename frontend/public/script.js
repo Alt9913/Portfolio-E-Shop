@@ -21,11 +21,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const offerCards = document.querySelector('.offer-cards');
 
     if (scrollRightBtn && scrollLeftBtn && offerCards) {
-        scrollRightBtn.addEventListener('click', function() {
+        scrollRightBtn.addEventListener('click', function () {
             offerCards.scrollBy({ left: 300, behavior: 'smooth' });  // Scrollt 300px nach rechts
         });
 
-        scrollLeftBtn.addEventListener('click', function() {
+        scrollLeftBtn.addEventListener('click', function () {
             offerCards.scrollBy({ left: -300, behavior: 'smooth' });  // Scrollt 300px nach links
         });
     }
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Formular-Submit-Handler
     const travelForm = document.getElementById('travel-form');
     if (travelForm) {
-        travelForm.addEventListener('submit', function(event) {
+        travelForm.addEventListener('submit', function (event) {
             event.preventDefault();  // Verhindert das Standardabsenden des Formulars
 
             const from = document.getElementById('from').value;
@@ -50,43 +50,65 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Hot Offers laden
-    async function loadHotOffers() {
-        try {
-            const response = await fetch("http://192.168.134.130:8000/hot-offers");  // NOCH ANPASSEN!
-            if (!response.ok) {
-                throw new Error(`HTTP-Fehler! Status: ${response.status}`);
-            }
-            const offers = await response.json();
-            const container = document.getElementById("offers-container");
+    class OfferLoader {
+        constructor(apiUrl, containerId) {
+            this.apiUrl = apiUrl;
+            this.containerId = containerId;
+        }
 
-            if (container) {
-                container.innerHTML = "";  // Alte Angebote löschen
+        async loadOffers() {
+            try {
+                const response = await fetch(this.apiUrl);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP-Fehler! Status: ${response.status}`);
+                }
+
+                const offers = await response.json();
+                const container = document.getElementById(this.containerId);
+
+                if (!container) return;
+
+                container.innerHTML = "";
 
                 offers.forEach((offer) => {
                     const offerHTML = `
-                        <div class="offer">
-                            <a href="${offer.link || '#'}" target="_blank">
-                                <img src="${offer.picture_path || 'assets/default.jpg'}" alt="${offer.name}">
-                            </a>
-                            <div class="offer-info">
-                                <h3>${offer.name}</h3>
-                                <p>Location: ${offer.city || ''}, ${offer.country_name || ''}</p>
-                                <p>Price: €${offer.price.toFixed(2)} per night</p>
-                            </div>
+                    <div class="offer">
+                        <a href="${offer.link || '#'}" target="_blank">
+                            <img src="${offer.picture_path || 'assets/default.jpg'}" alt="${offer.name}">
+                        </a>
+                        <div class="offer-info">
+                            <h3>${offer.name}</h3>
+                            <p>Location: ${offer.city || ''}, ${offer.country_name || ''}</p>
+                            <p>Price: €${offer.price.toFixed(2)} per night</p>
                         </div>
-                    `;
+                    </div>
+                `;
                     container.insertAdjacentHTML("beforeend", offerHTML);
                 });
-            }
-        } catch (error) {
-            console.error("Fehler beim Laden der Hot Offers:", error);
-            const container = document.getElementById("offers-container");
-            if (container) {
-                container.innerHTML = "<p>Die Angebote konnten nicht geladen werden.</p>";
+
+            } catch (error) {
+                console.error("Fehler beim Laden der Offers:", error);
+                const container = document.getElementById(this.containerId);
+                if (container) {
+                    container.innerHTML = "<p>Die Angebote konnten nicht geladen werden.</p>";
+                }
             }
         }
     }
 
-    loadHotOffers(); // Hot offers laden, wenn das DOM geladen ist
+    class HotOffersLoader extends OfferLoader {
+        constructor() {
+            super("http://192.168.134.130:8000/hot-offers", "offers-container");
+        }
+    }
+
+    class OurOffersLoader extends OfferLoader {
+        constructor() {
+            super("http://192.168.134.130:8000/our-offers", "our-offers-container");
+        }
+    }
+
+    hotOffers.loadOffers();
+    ourOffers.loadOffers();
 });

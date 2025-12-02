@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avetura</title>
-    <link rel="stylesheet" href="css/styles.css"> 
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
     <header>
-    
-     <a href="index.html">
-        <img src="assets/ogol.png" alt="Anventura Logo" id="logo">
-    </a>
-    <div class="search-container">
-        <input type="text" class="search-box" placeholder="Gebe dein Traumland ein...">
-    </div>
-    <div class="language-selector">
-        <button class="language-btn">EN</button>
-        <div class="language-dropdown">
-            <ul>
-                <li><a href="index.html" >EN</a></li>
-                <li><a href="indexde.html" >DE</a></li>
-                <li><a href="indextü.html" >TÜ</a></li>
-                <li><a href="indexru.html" >РУ</a></li>
-            </ul>
-        </div>
-    </div>
 
-   
-    
-</header>
-<nav>
+        <a href="index.html">
+            <img src="assets/ogol.png" alt="Anventura Logo" id="logo">
+        </a>
+        <div class="search-container">
+            <input type="text" class="search-box" placeholder="Gebe dein Traumland ein...">
+        </div>
+        <div class="language-selector">
+            <button class="language-btn">EN</button>
+            <div class="language-dropdown">
+                <ul>
+                    <li><a href="index.html">EN</a></li>
+                    <li><a href="indexde.html">DE</a></li>
+                    <li><a href="indextü.html">TÜ</a></li>
+                    <li><a href="indexru.html">РУ</a></li>
+                </ul>
+            </div>
+        </div>
+
+
+
+    </header>
+    <nav>
         <ul>
             <li><a href="world-map.html" id="wortra">World Map</a></li>
             <li><a href="all-inclusive.html" id="alltra">All-Inclusive</a></li>
@@ -40,120 +42,85 @@
         </ul>
     </nav>
 
-    
-        <main>
-    <!-- Heiße Angebote Abschnitt -->
-    <section id="hot-offers">
-    <h2>Hot offers</h2>
-    <div id="offers-container" class="offers-container">
-        <!-- Dynamisch geladen -->
-    </div>
-    </section>
 
-    <!-- Bilder Galerie Abschnitt -->
-    <section class="our-offers-index">
-    <h2>Our Offers</h2>
-    <p>Check out our best offers for you! From city breaks to countryside escapes, we have something for every traveler.</p>
-
-    <div class="offer-cards-index">
-        <div class="offer-card-index">
-            <div class="offer-info-index">
-                <img src="assets/berlinoffer.jpg" style="width: 300px; height: 150px;">
-                <h3>Berlin Weekend Getaway</h3>
-                <p>Enjoy a relaxing weekend in Berlin, with visits to historical landmarks, vibrant culture, and world-class museums.</p>
-                <span class="price">$250/weekend</span>
-                <button class="cta-btn">Book Now</button>
+    <main>
+        <!-- Heiße Angebote Abschnitt -->
+        <section id="hot-offers">
+            <h2>Hot offers</h2>
+            <div id="offers-container" class="offers-container">
+                <!-- Dynamisch geladen -->
             </div>
-        </div>
+        </section>
 
-        <div class="offer-card-index">
-            <div class="offer-info-index">
-                <img src="assets/spainoffer.jpg" style="width: 300px; height: 150px">
-                <h3>All-Inclusive Beach Holiday</h3>
-                <p>Escape to the sunny beaches of Spain and enjoy an all-inclusive vacation with meals, drinks, and activities included.</p>
-                <span class="price">$700/week</span>
-                <button class="cta-btn">Book Now</button>
+        <!-- Bilder Galerie Abschnitt -->
+        <section id="our-offers">
+            <h2>Our Offers</h2>
+            <p>Check out our best offers for you! From city breaks to countryside escapes, we have something for every
+                traveler.</p>
+
+            <div id="our-offers-container" class="offers-container">
+                <!-- Wird dynamisch geladen -->
             </div>
-        </div>
+        </section>
+        <section class="trending-destinations">
+            <h2>Trending Destinations</h2>
+            <p>Discover the most popular destinations and plan your next adventure with our exclusive offers.</p>
 
-        <div class="offer-card-index">
-            <div class="offer-info-index">
-                <img src="assets/parisoffer.jpeg" style="width: 300px; height: 150px">
-                <h3>Paris City Experience</h3>
-                <p>Explore Paris with a 3-day city pass, including access to the Louvre, Eiffel Tower, and Seine River cruise.</p>
-                <span class="price">$350/weekend</span>
-                <button class="cta-btn">Book Now</button>
+
+            <div class="destinations-cards">
+                <div class="destination-card">
+                    <img src="assets/newyorkoffer.jpeg" style="width: 300px; height: 150px">
+                    <h3>New York</h3>
+                    <p>Explore the Big Apple with top attractions like Times Square, Central Park, and Broadway shows.
+                    </p>
+                    <a href="https://www.nyctourism.com"><button class="cta-btn">See More</button></a>
+                </div>
+
+                <div class="destination-card">
+                    <img src="assets/tokiooffer.jpeg" style="width: 300px; height: 150px">
+                    <h3>Tokyo</h3>
+                    <p>Immerse yourself in Japan’s vibrant capital, where ancient culture meets modern technology.</p>
+                    <a href="https://www.gotokyo.org/en/index.html"><button class="cta-btn">See More</button></a>
+                </div>
+
+                <div class="destination-card">
+                    <img src="assets/sydneyoffer.jpg" style="width: 300px; height: 150px">
+                    <h3>Sydney</h3>
+                    <p>Relax on the beaches and explore the stunning harbour of Australia’s most iconic and beautiful
+                        city.</p>
+                    <a href="https://www.sydney.com"><button class="cta-btn">See More</button></a>
+                </div>
+
+                <div class="destination-card">
+                    <img src="assets/romeoffer.jpg" style="width: 300px; height: 150px">
+                    <h3>Rome</h3>
+                    <p>Walk through history with ancient landmarks such as the Colosseum, Vatican, and Roman Forum.</p>
+                    <a href="https://www.turismoroma.it/en"><button class="cta-btn">See More</button></a>
+                </div>
+
             </div>
-        </div>
 
-        <div class="offer-card-index">
-            <div class="offer-info-index">
-                <img src="assets/mallorcaoffer.jpg" style="width: 300px; height: 150px">
-                <h3>Luxury Resort in Mallorca</h3>
-                <p>Stay at a luxury resort in Mallorca, with exclusive spa treatments, beach access, and exquisite dining experiences.</p>
-                <span class="price">$1,200/week</span>
-                <button class="cta-btn">Book Now</button>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="trending-destinations">
-    <h2>Trending Destinations</h2>
-    <p>Discover the most popular destinations and plan your next adventure with our exclusive offers.</p>
-    
-        
-    <div class="destinations-cards">
-        <div class="destination-card">
-            <img src="assets/newyorkoffer.jpeg" style="width: 300px; height: 150px">
-            <h3>New York</h3>
-            <p>Explore the Big Apple with top attractions like Times Square, Central Park, and Broadway shows.</p>
-            <a href="https://www.nyctourism.com"><button class="cta-btn">See More</button></a>
-        </div>
 
-        <div class="destination-card">
-            <img src="assets/tokiooffer.jpeg" style="width: 300px; height: 150px">
-            <h3>Tokyo</h3>
-            <p>Immerse yourself in Japan’s vibrant capital, where ancient culture meets modern technology.</p>
-            <a href="https://www.gotokyo.org/en/index.html"><button class="cta-btn">See More</button></a>
-        </div>
-
-        <div class="destination-card">
-            <img src="assets/sydneyoffer.jpg" style="width: 300px; height: 150px">
-            <h3>Sydney</h3>
-            <p>Relax on the beaches and explore the stunning harbour of Australia’s most iconic and beautiful city.</p>
-            <a href="https://www.sydney.com"><button class="cta-btn">See More</button></a>
-        </div>
-
-        <div class="destination-card">
-            <img src="assets/romeoffer.jpg" style="width: 300px; height: 150px">
-            <h3>Rome</h3>
-            <p>Walk through history with ancient landmarks such as the Colosseum, Vatican, and Roman Forum.</p>
-            <a href="https://www.turismoroma.it/en"><button class="cta-btn">See More</button></a>
-        </div>
-        
-    </div>
-    
-    
-</section>
+        </section>
 
 
 
-    
-</main>
 
-    
-    
+    </main>
 
-    <script src="script.js"></script> 
-<footer>
+
+
+
+    <script src="script.js"></script>
+    <footer>
         <nav style="padding-top: 10px;">
             <ul>
-                <li><a href="index.html" >Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li><a href="legalinfo.html">Legal Info</a></li>
             </ul>
         </nav>
-</footer>
+    </footer>
 </body>
 
 </html>
