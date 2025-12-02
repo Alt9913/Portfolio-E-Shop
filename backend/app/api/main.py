@@ -9,10 +9,7 @@ def get_db():
         host="192.168.134.130",
         user="alt",
         password="admin",
-        database="DATAMART_PRD",
-        ssl_ca=None,
-        ssl_verify_cert=False,
-        ssl_verify_identity=False
+        database="DATAMART_PRD"
     )
 
 @app.get("/hot-offers")
