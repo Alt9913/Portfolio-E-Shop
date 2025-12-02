@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from db.queries import get_offers, get_our_offers
+from db.queries import get_offers
 import mysql.connector
 import ssl
 
