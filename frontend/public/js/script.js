@@ -85,7 +85,7 @@ async function loadHotOffers() {
                     </a>
                     <div class="offer-info">
                         <h3>${offer.name}</h3>
-                        <p>Location: ${offer.city || ''}, ${offer.land || ''}</p>
+                        <p>Location: ${offer.city || ''}, ${offer.country_name || ''}</p>
                         <p>Price: €${offer.price.toFixed(2)} per night</p>
                     </div>
                 </div>
