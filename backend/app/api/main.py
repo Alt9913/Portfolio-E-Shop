@@ -51,12 +51,12 @@ def get_hot_offers(limit: int = 3):
         raise HTTPException(status_code=500, detail=f"Fehler beim Abrufen der Angebote: {err}")
 
 @app.get("/our-offers")
-def get_our_offers(limit: int = 12):
+def get_our_offers(limit: int = 10):
     try:
         # Verbindung zur DB aufbauen
         db = get_db()
         cursor = db.cursor(dictionary=True)
-        cursor.execute(get_our_offers(), (limit,))
+        cursor.execute(get_offers(), (limit,))
         
         # Holen der Ergebnisse
         result = cursor.fetchall()
