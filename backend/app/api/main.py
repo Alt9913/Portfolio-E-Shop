@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from db.queries import get_offers, get_our_offers
+from db.queries import get_offers
 import mysql.connector
 import ssl
 
@@ -33,37 +33,49 @@ def get_db():
     )
 
 @app.get("/hot-offers")
-def get_hot_offers(limit: int = 3):
+def get_hot_offers(limit: int = 3, order: str = 'DESC'):
     try:
-        # Verbindung zur DB aufbauen
+        # Sicherheitscheck für order
+        order = order.upper()
+        if order not in ('ASC', 'DESC'):
+            order = 'DESC'
+
         db = get_db()
         cursor = db.cursor(dictionary=True)
-        cursor.execute(get_offers(), (limit,))
         
-        # Holen der Ergebnisse
+        # Query aus dem Modul holen und ORDER einfügen
+        query_template = get_offers()  # Hol die Query als String
+        query = query_template.replace("ORDER BY id ORDER", f"ORDER BY id {order}")
+
+        cursor.execute(query, (limit,))
         result = cursor.fetchall()
         cursor.close()
         db.close()
         
         return result
     except mysql.connector.Error as err:
-        # Falls ein Fehler in der DB-Verbindung oder Abfrage auftritt, eine Fehlerantwort senden
         raise HTTPException(status_code=500, detail=f"Fehler beim Abrufen der Angebote: {err}")
 
 @app.get("/our-offers")
-def get_our_offers(limit: int = 10):
+def get_our_offers(limit: int = 10, order: str = 'ASC'):
     try:
-        # Verbindung zur DB aufbauen
+        # Sicherheitscheck für order
+        order = order.upper()
+        if order not in ('ASC', 'DESC'):
+            order = 'DESC'
+
         db = get_db()
         cursor = db.cursor(dictionary=True)
-        cursor.execute(get_our_offers(), (limit,))
         
-        # Holen der Ergebnisse
+        # Query aus dem Modul holen und ORDER einfügen
+        query_template = get_offers()  # Hol die Query als String
+        query = query_template.replace("ORDER BY id ORDER", f"ORDER BY id {order}")
+
+        cursor.execute(query, (limit,))
         result = cursor.fetchall()
         cursor.close()
         db.close()
         
         return result
     except mysql.connector.Error as err:
-        # Falls ein Fehler in der DB-Verbindung oder Abfrage auftritt, eine Fehlerantwort senden
         raise HTTPException(status_code=500, detail=f"Fehler beim Abrufen der Angebote: {err}")
