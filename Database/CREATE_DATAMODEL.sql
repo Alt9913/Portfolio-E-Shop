@@ -33,6 +33,7 @@ CREATE TABLE country (
     population VARCHAR(50),
     picture_name VARCHAR(255),
     picture_path VARCHAR(255),
+    available TINYINT(1),
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
     date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     modified_by_user VARCHAR(50)
@@ -68,10 +69,11 @@ CREATE TABLE customer (
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     birthdate DATE,
+    email VARCHAR(100),
     country VARCHAR(100),
     city VARCHAR(100),
-    postal_code VARCHAR(20),
     street VARCHAR(100),
+    postal_code VARCHAR(20),
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
     date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     modified_by_user VARCHAR(50)
@@ -82,10 +84,11 @@ CREATE TABLE contacts (
     first_name VARCHAR(100),
     last_name VARCHAR(100),
     birthdate DATE,
+    email VARCHAR(100),
     country VARCHAR(100),
     city VARCHAR(100),
-    postal_code VARCHAR(20),
     street VARCHAR(100),
+    postal_code VARCHAR(20),
     date_created DATETIME DEFAULT CURRENT_TIMESTAMP,
     date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     modified_by_user VARCHAR(50)
@@ -94,13 +97,13 @@ CREATE TABLE contacts (
 CREATE TABLE products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255),
+    country_id INT,
+    description TEXT,
     price DECIMAL(10,2),
-    land VARCHAR(100),
     city VARCHAR(100),
     street VARCHAR(100),
     postal_code VARCHAR(20),
     contact_id INT,
-    date DATE,
     picture_name VARCHAR(255),
     picture_path VARCHAR(255),
     link VARCHAR(255),
@@ -108,6 +111,7 @@ CREATE TABLE products (
     date_modified DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     modified_by_user VARCHAR(50),
     FOREIGN KEY (contact_id) REFERENCES contacts(id) ON DELETE SET NULL
+    FOREIGN KEY (country_id) REFERENCES country(id) ON DELETE SET NULL
 );
 
 CREATE TABLE booking (
