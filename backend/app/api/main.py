@@ -33,7 +33,7 @@ def get_db():
     )
 
 @app.get("/hot-offers")
-def get_hot_offers(limit: int = 10):
+def get_hot_offers(limit: int = 3):
     try:
         # Verbindung zur DB aufbauen
         db = get_db()
