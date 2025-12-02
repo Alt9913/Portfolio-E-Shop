@@ -11,6 +11,5 @@ def get_offers():
     FROM products p
     LEFT JOIN country c 
         ON p.country_id = c.id
-    ORDER BY p.date_created DESC
     LIMIT %s
     """
