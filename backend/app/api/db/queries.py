@@ -12,6 +12,6 @@ def get_offers():
     LEFT JOIN country c 
         ON p.country_id = c.id
     WHERE link IS NOT NULL
-    ORDER BY id ORDER
+    ORDER BY p.id ORDER
     LIMIT %s
     """
