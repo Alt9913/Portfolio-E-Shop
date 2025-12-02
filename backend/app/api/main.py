@@ -49,3 +49,21 @@ def get_hot_offers(limit: int = 3):
     except mysql.connector.Error as err:
         # Falls ein Fehler in der DB-Verbindung oder Abfrage auftritt, eine Fehlerantwort senden
         raise HTTPException(status_code=500, detail=f"Fehler beim Abrufen der Angebote: {err}")
+
+@app.get("/our-offers")
+def get_hot_offers(limit: int = 12):
+    try:
+        # Verbindung zur DB aufbauen
+        db = get_db()
+        cursor = db.cursor(dictionary=True)
+        cursor.execute(get_our_offers(), (limit,))
+        
+        # Holen der Ergebnisse
+        result = cursor.fetchall()
+        cursor.close()
+        db.close()
+        
+        return result
+    except mysql.connector.Error as err:
+        # Falls ein Fehler in der DB-Verbindung oder Abfrage auftritt, eine Fehlerantwort senden
+        raise HTTPException(status_code=500, detail=f"Fehler beim Abrufen der Angebote: {err}")
