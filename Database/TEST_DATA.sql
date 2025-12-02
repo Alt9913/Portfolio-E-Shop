@@ -17,11 +17,11 @@ VALUES
 
 INSERT INTO country_highlights (name, country_id, description, link, picture_name, picture_path, modified_by_user) 
 VALUES 
-('Brandenburg Gate', 1, 'The Brandenburg Gate is a neoclassical monument in Berlin, one of Germany’s most famous landmarks.', '../countries/germany.html', 'brandenburggate.png', '../assets/brandenburggate.png', 'null')
-,('Hagia Sophia', 2, 'Hagia Sophia is a historic architectural wonder in Istanbul, showcasing a blend of Christian and Islamic influences.', '../countries/turkey.html','turkey-highlight1.jpg', '../assets/turkeyhighlight.jpg', 'null')
-,('Kyiv Pechersk Lavra', 3, 'Kyiv Pechersk Lavra is a historic Orthodox Christian monastery in Kyiv, a UNESCO World Heritage Site.', '../countries/ukraine.html', 'kiewkloster.jpg', '../assets/kiewkloster.jpg','null')
-,('Bran Castle', 4, 'Bran Castle, often associated with the Dracula legend, is a popular tourist attraction in Romania.', '../countries/romania.html','romania-highlight1.jpeg', '../assets/romania-highlight1.jpeg', 'null')
-,('Plitvice Lakes National Park', 5, 'Plitvice Lakes National Park is a UNESCO World Heritage site known for its cascading lakes and waterfalls.', '../countries/croatia.html','croatia-highlight2.png', '../assets/croatia-highlight2.png', 'null');
+('Brandenburg Gate', 1, 'The Brandenburg Gate is a neoclassical monument in Berlin, one of Germany’s most famous landmarks.', '../countries/germany.html', 'brandenburggate.png', '../assets/brandenburggate.png', 'admin')
+,('Hagia Sophia', 2, 'Hagia Sophia is a historic architectural wonder in Istanbul, showcasing a blend of Christian and Islamic influences.', '../countries/turkey.html','turkey-highlight1.jpg', '../assets/turkeyhighlight.jpg', 'admin')
+,('Kyiv Pechersk Lavra', 3, 'Kyiv Pechersk Lavra is a historic Orthodox Christian monastery in Kyiv, a UNESCO World Heritage Site.', '../countries/ukraine.html', 'kiewkloster.jpg', '../assets/kiewkloster.jpg','admin')
+,('Bran Castle', 4, 'Bran Castle, often associated with the Dracula legend, is a popular tourist attraction in Romania.', '../countries/romania.html','romania-highlight1.jpeg', '../assets/romania-highlight1.jpeg', 'admin')
+,('Plitvice Lakes National Park', 5, 'Plitvice Lakes National Park is a UNESCO World Heritage site known for its cascading lakes and waterfalls.', '../countries/croatia.html','croatia-highlight2.png', '../assets/croatia-highlight2.png', 'admin');
 
 INSERT INTO products (name, country_id, description, price, city, picture_name, picture_path, link, modified_by_user)
 VALUES 
