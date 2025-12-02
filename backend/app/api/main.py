@@ -1,10 +1,16 @@
 from fastapi import FastAPI
-from db.connection import get_db
 from db.queries import get_offers
 import mysql.connector
 
 app = FastAPI()
 
+def get_db():
+    return mysql.connector.connect(
+        host="localhost",
+        user="alt",
+        password="admin",
+        database="DATAMART_PRD"
+    )
 
 @app.get("/hot-offers")
 def get_hot_offers( limit: int = 10):
