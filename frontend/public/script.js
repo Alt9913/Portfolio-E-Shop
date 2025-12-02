@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Hot Offers laden
     async function loadHotOffers() {
         try {
-            const response = await fetch("http://localhost:8000/hot-offers");  // NOCH ANPASSEN!
+            const response = await fetch("http://192.168.134.130:8000/hot-offers");  // NOCH ANPASSEN!
             if (!response.ok) {
                 throw new Error(`HTTP-Fehler! Status: ${response.status}`);
             }
