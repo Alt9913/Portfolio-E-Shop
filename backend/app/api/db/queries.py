@@ -16,7 +16,7 @@ def get_offers():
     LIMIT %s
     """
 
-def get_out_offers():
+def get_our_offers():
     return """
     SELECT 
         p.id, 
